@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\barang;
+use App\Models\leveljenisbarang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class barangController extends Controller
      */
     public function index()
     {
-        $barang = barang::all();
+        $barang = DB::table('barangs')
+        ->select('barangs.*', 'leveljenisbarang.namalevel')
+        ->join('leveljenisbarang', 'barangs.id_levelbarang', '=', 'leveljenisbarang.id_levelbarang')
+        ->get();
         return view('admin-side.page-admin.barang.kelola-barang', compact('barang'));
     }
 
@@ -25,7 +29,10 @@ class barangController extends Controller
      */
     public function create()
     {
-        //
+
+        $leveljenisbarang = leveljenisbarang::all();
+
+        return view('admin-side.page-admin.barang.tambah-barang', compact('leveljenisbarang'));
     }
 
     /**
@@ -35,30 +42,42 @@ class barangController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate(
+            $request,
+            [
+                'nama_barang' => 'required',
+                'nama_jenis_barang' => 'required', 
+                'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
+                'stock' => 'required'
+                                          
+                
+            ]
+        );
+        $produk = new barang();
+        $produk->nama_barang = $request->nama_barang;
+        $produk->id_levelbarang = $request->nama_jenis_barang;
+        $produk->stock = $request->stock;
+        if ($request->hasFile('file_foto')) {
+            $file = $request->file('file_foto')->getClientOriginalName();
+            $request->file('file_foto')->move('images/Barang', $file);
+            $produk->file_foto = $file;
+        }
+        
+        $produk->save();
+        return redirect('kelolabarang');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($barang_id)
     {
-        //
+        $update = barang::find($barang_id);
+        $level = DB::table('leveljenisbarang')->get();
+        return view('admin-side.page-admin.barang.edit-barang', compact('update', 'level'));
     }
 
     /**
@@ -68,9 +87,33 @@ class barangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(request $request, $barang_id)
+    {   
+        $this->validate(
+            $request,
+            [
+                'nama_barang' => 'required',
+                'nama_jenis_barang' => 'required', 
+                'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
+                'stock' => 'required'
+                                          
+                
+            ]
+        );
+        $update = barang::find($barang_id);
+        $file = $update->file_foto;
+        if ($request->hasFile('file_foto')) {
+            $file = $request->file('file_foto')->getClientOriginalName();
+            $request->file('file_foto')->move('images/Barang', $file);
+            $update->file_foto = $file;
+        }
+        $update->nama_barang = $request->nama_barang;
+        $update->id_levelbarang = $request->nama_jenis_barang;
+        $update->file_foto = $file;
+        $update->stock = $request->stock;
+        $update->save();
+
+        return redirect('kelolabarang');
     }
 
     /**
@@ -79,8 +122,11 @@ class barangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($produk_id)
     {
-        //
-    }
+        $hapus = barang::find($produk_id);
+        if ($hapus->delete()) {
+        }
+        return redirect()->back();
+}
 }

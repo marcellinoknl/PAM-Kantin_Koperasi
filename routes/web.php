@@ -28,9 +28,14 @@ Route::post('/edit-produk-kantin/{id}', [produkController::class, 'update'])->na
 Route::post('/tambah-produk-kantin/store', [produkController::class, 'store'])->name('formproduk.store');
 Route::get('/produk/delete/{id}', [produkController::class, 'delete'])->name('produk.hapus');
 
-
+//kelola barang
+Route::get('/kelolabarang', [barangController::class, 'index']);
+Route::get('/tambah-barang', [barangController::class, 'create']);
+Route::get('/edit-barang/{id}', [barangController::class, 'edit']);
+Route::post('/edit-barang-koperasi/{id}', [barangController::class, 'update'])->name('barang.ubah');
+Route::post('/tambah-barang-koperasi/store', [barangController::class, 'store'])->name('formbarang.store');
+Route::get('/barang/delete/{id}', [barangController::class, 'delete'])->name('barang.hapus');
 
 Route::get('/validasipesanan', [pesananController::class, 'index']);
-Route::get('/kelolabarang', [barangController::class, 'index']);
 Route::get('/kelolapulsa', [pulsaController::class, 'index']);
 Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);

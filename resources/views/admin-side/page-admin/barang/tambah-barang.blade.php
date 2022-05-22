@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Kelola Makanan Minuman</title>
+        <title>Kelola Barang</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -18,20 +18,20 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Selamat Datang,</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Edit Makanan Minuman</li>
+                <li class="breadcrumb-item active">Tambah Barang dan Snack</li>
             </ol>
-            <p style="color:red">*Gambar Makanan Minuman Harus di update ulang</p>
-            <form action="{{ route('produk.ubah', $update->produk_id) }}" method="post"
+            
+            <form action="{{ route('formbarang.store') }}" method="post"
             enctype="multipart/form-data">
             {{ csrf_field() }}
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row mb-4">
                   <div class="col">
                     <div class="form-outline">
-                        <label class="form-label" for="form6Example1">Nama Produk</label>
-                      <input type="text" id="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror" name="nama_produk" value="{{$update->nama_produk}}"/>
+                        <label class="form-label" for="form6Example1">Nama barang</label>
+                      <input type="text" id="nama_barang" class="form-control @error('nama_barang') is-invalid @enderror" name="nama_barang" value="{{old('nama_barang')}}"/>
                     
-                      @error('nama_produk')
+                      @error('nama_barang')
                       <div class="invalid-feedback">
                           {{ $message }}
                       </div>
@@ -41,15 +41,15 @@
 
                   <div class="col">
                     <div class="form-outline">
-                        <label class="form-label" for="form6Example2">Jenis Produk</label>
-                        <select class="form-control @error('nama_jenis_produk') is-invalid @enderror" aria-label="Default select example" name="nama_jenis_produk">
-                            <option selected disabled>Pilih Jenis Produk</option>
-                            @foreach ( $level as $leveljenisproduks )
-                            <option value="{{ $leveljenisproduks->id_levelproduk }}" @if( $leveljenisproduks->id_levelproduk == $update->id_levelproduk)  selected  @endif>
-                                {{ $leveljenisproduks->namalevel }}</option>
+                        <label class="form-label" for="form6Example2">Jenis barang</label>
+                        <select class="form-control @error('nama_jenis_barang') is-invalid @enderror" aria-label="Default select example" name="nama_jenis_barang">
+                            <option selected disabled>Pilih Jenis barang</option>
+                            @foreach ( $leveljenisbarang as $leveljenisbarangs )
+                            <option value="{{ $leveljenisbarangs->id_levelbarang }}"{{old('nama_jenis_barang')== $leveljenisbarangs->id_levelbarang ? 'selected': null }}>
+                                {{ $leveljenisbarangs->namalevel }}</option>
                             @endforeach
                           </select>        
-                          @error('nama_jenis_produk')
+                          @error('nama_jenis_barang')
                           <div class="invalid-feedback">
                               {{ $message }}
                           </div>
@@ -62,7 +62,7 @@
                     <div class="col">
                       <div class="form-outline">
                           <label class="form-label" for="form6Example1">Stock Makanan dan Minuman</label>
-                        <input type="number" id="form6Example1" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{$update->stock}}" />                 
+                        <input type="number" id="form6Example1" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{old('stock')}}" />                 
                         @error('stock')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -73,7 +73,7 @@
                     <div class="col">
                       <div class="form-outline">
                           <label class="form-label" for="form6Example2">Gambar Makanan dan Minuman</label>
-                        <input type="file" id="form6Example2" class="form-control @error('file_foto') is-invalid @enderror" name="file_foto" value="{{$update->file_foto}}"/>
+                        <input type="file" id="form6Example2" class="form-control @error('file_foto') is-invalid @enderror" name="file_foto" value="{{old('file_foto')}}"/>
                         @error('file_foto')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -84,7 +84,7 @@
                   </div>
               
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Edit</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Tambahkan</button>
             </form>
         </div>
     </main>
