@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\barang;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class barangController extends Controller
@@ -13,7 +14,8 @@ class barangController extends Controller
      */
     public function index()
     {
-        //
+        $barang = barang::all();
+        return view('admin-side.page-admin.barang.kelola-barang', compact('barang'));
     }
 
     /**

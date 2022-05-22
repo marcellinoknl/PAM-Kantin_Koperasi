@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\produkController;
+use App\Http\Controllers\barangController;
+use App\Http\Controllers\pulsaController;
+use App\Http\Controllers\pesananController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +17,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home-admin');
+    return view('admin-side.page-admin.home-admin');
 });
+
+//Makanan Minuman
+Route::get('/kelolaproduk', [produkController::class, 'index']);
+Route::get('/tambah-produk', [produkController::class, 'create']);
+Route::get('/edit-produk/{id}', [produkController::class, 'edit']);
+Route::post('/edit-produk-kantin/{id}', [produkController::class, 'update'])->name('produk.ubah');
+Route::post('/tambah-produk-kantin/store', [produkController::class, 'store'])->name('formproduk.store');
+Route::get('/produk/delete/{id}', [produkController::class, 'delete'])->name('produk.hapus');
+
+
+
+Route::get('/validasipesanan', [pesananController::class, 'index']);
+Route::get('/kelolabarang', [barangController::class, 'index']);
+Route::get('/kelolapulsa', [pulsaController::class, 'index']);
+Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\leveljenisproduks;
+use App\Models\produuk;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class produkController extends Controller
@@ -13,7 +16,11 @@ class produkController extends Controller
      */
     public function index()
     {
-        //
+        $produk = DB::table('produuks')
+        ->select('produuks.*', 'leveljenisproduks.namalevel')
+        ->join('leveljenisproduks', 'produuks.id_levelproduk', '=', 'leveljenisproduks.id_levelproduk')
+        ->get();
+        return view('admin-side.page-admin.produk.kelolaproduk', compact('produk'));
     }
 
     /**
@@ -23,7 +30,10 @@ class produkController extends Controller
      */
     public function create()
     {
-        //
+
+        $leveljenisproduk = leveljenisproduks::all();
+
+        return view('admin-side.page-admin.produk.tambah-produk', compact('leveljenisproduk'));
     }
 
     /**
@@ -33,30 +43,42 @@ class produkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate(
+            $request,
+            [
+                'nama_produk' => 'required',
+                'nama_jenis_produk' => 'required', 
+                'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
+                'stock' => 'required'
+                                          
+                
+            ]
+        );
+        $produk = new produuk();
+        $produk->nama_produk = $request->nama_produk;
+        $produk->id_levelproduk = $request->nama_jenis_produk;
+        $produk->stock = $request->stock;
+        if ($request->hasFile('file_foto')) {
+            $file = $request->file('file_foto')->getClientOriginalName();
+            $request->file('file_foto')->move('images/MakananMinuman', $file);
+            $produk->file_foto = $file;
+        }
+        
+        $produk->save();
+        return redirect('kelolaproduk');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($produk_id)
     {
-        //
+        $update = produuk::find($produk_id);
+        $level = DB::table('leveljenisproduks')->get();
+        return view('admin-side.page-admin.produk.edit-produk', compact('update', 'level'));
     }
 
     /**
@@ -66,9 +88,33 @@ class produkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(request $request, $produk_id)
+    {   
+        $this->validate(
+            $request,
+            [
+                'nama_produk' => 'required',
+                'nama_jenis_produk' => 'required', 
+                'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
+                'stock' => 'required'
+                                          
+                
+            ]
+        );
+        $update = produuk::find($produk_id);
+        $file = $update->file_foto;
+        if ($request->hasFile('file_foto')) {
+            $file = $request->file('file_foto')->getClientOriginalName();
+            $request->file('file_foto')->move('images/Atraksi', $file);
+            $update->file_foto = $file;
+        }
+        $update->nama_produk = $request->nama_produk;
+        $update->id_levelproduk = $request->nama_jenis_produk;
+        $update->file_foto = $file;
+        $update->stock = $request->stock;
+        $update->save();
+
+        return redirect('kelolaproduk');
     }
 
     /**
@@ -77,8 +123,11 @@ class produkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($produk_id)
     {
-        //
-    }
+        $hapus = produuk::find($produk_id);
+        if ($hapus->delete()) {
+        }
+        return redirect()->back();
+}
 }

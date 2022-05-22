@@ -41,8 +41,8 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Makanan Minuman</a>
-                            <a class="nav-link" href="#">Barang</a>
+                            <a class="nav-link" href="/kelolaproduk">Makanan Minuman</a>
+                            <a class="nav-link" href="/kelolabarang">Barang</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -52,11 +52,11 @@
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/validasipesanan">
                                 <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
                                 Validasi Pesanan
                             </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                            <a class="nav-link collapsed" href="/kelolapulsa" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                 <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
                                 Pulsa
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -64,11 +64,11 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/kelolapulsa">
                                         <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
                                         Kelola Pulsa</a>
                                     
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/validasipulsa">
                                         <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>  
                                         Validasi Pulsa</a>
                                 </nav>

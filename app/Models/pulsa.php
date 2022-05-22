@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class pulsa extends Model
 {
     use HasFactory;
+    protected $table = 'pulsas';
+    protected $primaryKey = 'id';
 }

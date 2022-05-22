@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\pulsa;
+use App\Models\produuk;
+use App\Models\pesanan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class pulsaController extends Controller
+class pesananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +15,10 @@ class pulsaController extends Controller
      */
     public function index()
     {
-        $pulsa = pulsa::all();
-        return view('admin-side.page-admin.pulsa.kelolapulsa', compact('pulsa'));
+        $validasipesanan = produuk::all();
+        return view('admin-side.page-admin.validasipesanan.validasipesanan', compact('validasipesanan'));
     }
-    public function validasiindex()
-    {
-        $validasipulsa = pulsa::all();
-        return view('admin-side.page-admin.pulsa.validasipulsa', compact('validasipulsa'));
-    }
+
 
     /**
      * Show the form for creating a new resource.
