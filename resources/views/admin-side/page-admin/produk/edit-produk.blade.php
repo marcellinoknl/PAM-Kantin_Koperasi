@@ -16,7 +16,7 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Selamat Datang,</h1>
+            <h1 class="mt-4">Selamat Datang, {{Auth::user()->nama_lengkap}}</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Edit Makanan Minuman</li>
             </ol>
@@ -80,6 +80,21 @@
                         </div>
                     @enderror  
                       </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <div class="form-outline">
+                          <label class="form-label" for="form6Example1">Harga Makanan dan Minuman</label>
+                        <input type="number" id="form6Example1" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{$update->harga}}" />                 
+                        @error('harga')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror  
+                    </div>
+                    </div>
+                    <div class="col">
                     </div>
                   </div>
               

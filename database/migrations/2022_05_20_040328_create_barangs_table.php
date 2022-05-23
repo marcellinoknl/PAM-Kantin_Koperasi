@@ -17,6 +17,7 @@ class CreateBarangsTable extends Migration
             $table->increments('barang_id');
             $table->string('nama_barang');
             $table->integer('stock');
+            $table->integer('harga');
             $table->integer('id_levelbarang')->unsigned();
             $table->foreign('id_levelbarang')->references('id_levelbarang')->on('leveljenisbarang')->onDelete('cascade');
             $table->string('file_foto');

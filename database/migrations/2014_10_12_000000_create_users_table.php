@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('ktp');
             $table->string('nama_lengkap');
             $table->bigInteger('nohp');
-            $table->integer('role');
+            $table->integer('role')->default(0);
             $table->string('email')->unique();
             $table->string('google')->unique()->nullable();
             $table->string('facebook')->unique()->nullable();

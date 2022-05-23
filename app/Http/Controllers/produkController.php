@@ -49,6 +49,7 @@ class produkController extends Controller
             [
                 'nama_produk' => 'required',
                 'nama_jenis_produk' => 'required', 
+                'harga' => 'required', 
                 'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
                 'stock' => 'required'
                                           
@@ -59,6 +60,7 @@ class produkController extends Controller
         $produk->nama_produk = $request->nama_produk;
         $produk->id_levelproduk = $request->nama_jenis_produk;
         $produk->stock = $request->stock;
+        $produk->harga = $request->harga;
         if ($request->hasFile('file_foto')) {
             $file = $request->file('file_foto')->getClientOriginalName();
             $request->file('file_foto')->move('images/MakananMinuman', $file);
@@ -96,7 +98,8 @@ class produkController extends Controller
                 'nama_produk' => 'required',
                 'nama_jenis_produk' => 'required', 
                 'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
-                'stock' => 'required'
+                'stock' => 'required',
+                'harga' => 'required'
                                           
                 
             ]
@@ -112,6 +115,7 @@ class produkController extends Controller
         $update->id_levelproduk = $request->nama_jenis_produk;
         $update->file_foto = $file;
         $update->stock = $request->stock;
+        $update->harga = $request->harga;
         $update->save();
 
         return redirect('kelolaproduk');

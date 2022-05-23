@@ -49,7 +49,8 @@ class barangController extends Controller
                 'nama_barang' => 'required',
                 'nama_jenis_barang' => 'required', 
                 'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
-                'stock' => 'required'
+                'stock' => 'required',
+                'harga' => 'required'
                                           
                 
             ]
@@ -58,6 +59,7 @@ class barangController extends Controller
         $produk->nama_barang = $request->nama_barang;
         $produk->id_levelbarang = $request->nama_jenis_barang;
         $produk->stock = $request->stock;
+        $produk->harga = $request->harga;
         if ($request->hasFile('file_foto')) {
             $file = $request->file('file_foto')->getClientOriginalName();
             $request->file('file_foto')->move('images/Barang', $file);
@@ -95,7 +97,8 @@ class barangController extends Controller
                 'nama_barang' => 'required',
                 'nama_jenis_barang' => 'required', 
                 'file_foto' => 'required|mimes:jpeg,jpg,png,gif',
-                'stock' => 'required'
+                'stock' => 'required',
+                'harga' => 'required'
                                           
                 
             ]
@@ -111,6 +114,7 @@ class barangController extends Controller
         $update->id_levelbarang = $request->nama_jenis_barang;
         $update->file_foto = $file;
         $update->stock = $request->stock;
+        $update->harga = $request->harga;
         $update->save();
 
         return redirect('kelolabarang');
