@@ -16,6 +16,8 @@ use App\Http\Controllers\pesananController;
 |
 */
 
+Route::group(['middleware' => ['auth']], function () {
+
 Route::get('/', function () {
     return view('admin-side.page-admin.home-admin');
 });
@@ -39,3 +41,8 @@ Route::get('/barang/delete/{id}', [barangController::class, 'delete'])->name('ba
 Route::get('/validasipesanan', [pesananController::class, 'index']);
 Route::get('/kelolapulsa', [pulsaController::class, 'index']);
 Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
