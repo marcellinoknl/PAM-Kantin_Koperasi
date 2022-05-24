@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\ruangan;
+=======
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
 
 class ruanganController extends Controller
 {
@@ -15,6 +18,7 @@ class ruanganController extends Controller
     public function index()
     {
         //
+<<<<<<< HEAD
         
     }
 
@@ -25,6 +29,10 @@ class ruanganController extends Controller
             'dataruangan' => $dataruangan
         ]);
     }
+=======
+    }
+
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
     /**
      * Show the form for creating a new resource.
      *
@@ -44,6 +52,7 @@ class ruanganController extends Controller
     public function store(Request $request)
     {
         //
+<<<<<<< HEAD
         $tambahruangan = new ruangan();
         $tambahruangan->nama_ruangan = $request->nama_ruangan;
         $tambahruangan->keterangan = $request->keterangan;
@@ -55,6 +64,8 @@ class ruanganController extends Controller
 
     public function tambahruangan(){
         return view('admin-side.page-admin.ruangan.tambahruangan');
+=======
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
     }
 
     /**
@@ -77,8 +88,11 @@ class ruanganController extends Controller
     public function edit($id)
     {
         //
+<<<<<<< HEAD
         $update = ruangan::find($id);
         return view('admin-side.page-admin.ruangan.editruangan', compact('update'));
+=======
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
     }
 
     /**
@@ -91,6 +105,7 @@ class ruanganController extends Controller
     public function update(Request $request, $id)
     {
         //
+<<<<<<< HEAD
        
         $update = ruangan::find($id);
         
@@ -99,6 +114,8 @@ class ruanganController extends Controller
         $update->save();
 
         return redirect('kelolaruangan');
+=======
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
     }
 
     /**
@@ -107,6 +124,7 @@ class ruanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function delete($id)
     {
         //
@@ -114,5 +132,10 @@ class ruanganController extends Controller
         if ($hapus->delete()) {
         }
         return redirect()->back();
+=======
+    public function destroy($id)
+    {
+        //
+>>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
     }
 }
