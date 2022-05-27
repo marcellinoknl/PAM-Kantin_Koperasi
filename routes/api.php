@@ -21,9 +21,7 @@ use App\Http\Controllers\pesananController;
 
 Route::post('login', [UserController::class,'login']);
 Route::get('makananminuman', [ProdukController::class,'index']);
-Route::get('produk', 'Api\ProdukController@index');
 Route::post('chekout', 'Api\TransaksiController@store');
 Route::get('chekout/user/{id}', 'Api\TransaksiController@history');
 Route::post('chekout/batal/{id}', 'Api\TransaksiController@batal');
-
 Route::post('push', 'Api\TransaksiController@pushNotif');

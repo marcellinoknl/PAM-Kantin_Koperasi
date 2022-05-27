@@ -5,10 +5,8 @@ use App\Http\Controllers\produkController;
 use App\Http\Controllers\barangController;
 use App\Http\Controllers\pulsaController;
 use App\Http\Controllers\pesananController;
-<<<<<<< HEAD
 use App\Http\Controllers\ruanganController;
-=======
->>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,7 +45,6 @@ Route::get('/kelolapulsa', [pulsaController::class, 'index']);
 Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);
 });
 
-<<<<<<< HEAD
 //kelola ruangan
 Route::get('/kelolaruangan', [ruanganController::class, 'kelolaruangan']);
 Route::get('/tambahruangan', [ruanganController::class, 'tambahruangan']);
@@ -57,8 +54,7 @@ Route::get('/editruangan/{id}', [ruanganController::class, 'edit']);
 Route::get('/ruangan/delete/{id}', [ruanganController::class, 'delete'])->name('ruangan.hapus');
 
 
-=======
->>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

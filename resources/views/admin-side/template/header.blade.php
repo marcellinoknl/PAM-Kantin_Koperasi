@@ -54,13 +54,12 @@
                             <a class="nav-link" href="/kelolabarang">Barang</a>
                         </nav>
                     </div>
-<<<<<<< HEAD
+
                     <a class="nav-link" href="{{'/kelolaruangan'}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Kelola Ruangan
                     </a>
-=======
->>>>>>> e205f264ea068f87c0257d1b95ed36ce27ccbb3e
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Pembayaran-Pulsa
