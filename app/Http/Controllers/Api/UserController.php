@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Validator;
-
+//D:\AAA_IT DEL\Semester 4\PAM\Proyek\Aplikasi_Web_Admin\PAM-Kantin_Koperasi_Web\app\Http\Controllers\Api\UserController.php
 class UserController extends Controller
 {
     public function login(Request $requset){
@@ -27,7 +27,7 @@ class UserController extends Controller
                     'user' => $user
                 ]);
             }
-            return $this->error('Password Salah');
+            return $this->error('Password yang dimasukkan Salah');
         }
         return $this->error('Email tidak terdaftar');
     }
@@ -35,9 +35,10 @@ class UserController extends Controller
     public function register(Request $requset){
         //nama, email, password
         $validasi = Validator::make($requset->all(), [
-            'name' => 'required',
+            'ktp' => 'required',
+            'nama_lengkap' => 'required',
+            'nohp' => 'required',
             'email' => 'required|unique:users',
-            'phone' => 'required|unique:users',
             'password' => 'required|min:6'
         ]);
 
