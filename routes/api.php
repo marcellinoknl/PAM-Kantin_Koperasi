@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProdukController;
-use App\Http\Controllers\barangController;
+use App\Http\Controllers\Api\BarangController;
+
 
 use App\Http\Controllers\pulsaController;
 use App\Http\Controllers\pesananController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\pesananController;
 Route::post('login', [UserController::class,'login']);
 Route::post('register', [UserController::class,'register']);
 Route::get('makananminuman', [ProdukController::class,'index']);
+Route::get('barang', [BarangController::class,'index']);
 Route::post('chekout', 'Api\TransaksiController@store');
 Route::get('chekout/user/{id}', 'Api\TransaksiController@history');
 Route::post('chekout/batal/{id}', 'Api\TransaksiController@batal');

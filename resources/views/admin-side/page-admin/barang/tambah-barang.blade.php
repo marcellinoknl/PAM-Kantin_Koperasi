@@ -61,7 +61,7 @@
                 <div class="row mb-4">
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example1">Stock Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example1">Stock Barang</label>
                         <input type="number" id="form6Example1" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{old('stock')}}" />                 
                         @error('stock')
                         <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example2">Gambar Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example2">Gambar Barang</label>
                         <input type="file" id="form6Example2" class="form-control @error('file_foto') is-invalid @enderror" name="file_foto" value="{{old('file_foto')}}"/>
                         @error('file_foto')
                         <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                   <div class="row mb-4">
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example1">Harga Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example1">Harga Barang</label>
                         <input type="number" id="form6Example1" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{old('harga')}}" />                 
                         @error('harga')
                         <div class="invalid-feedback">

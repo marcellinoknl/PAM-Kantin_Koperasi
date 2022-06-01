@@ -43,7 +43,7 @@
                     <div class="form-outline">
                         <label class="form-label" for="form6Example2">Jenis barang</label>
                         <select class="form-control @error('nama_jenis_barang') is-invalid @enderror" aria-label="Default select example" name="nama_jenis_barang">
-                            <option selected disabled>Pilih Jenis barang</option>
+                            <option selected disabled>Pilih Jenis Barang</option>
                             @foreach ( $level as $leveljenisbarangs )
                             <option value="{{ $leveljenisbarangs->id_levelbarang }}" @if( $leveljenisbarangs->id_levelbarang == $update->id_levelbarang)  selected  @endif>
                                 {{ $leveljenisbarangs->namalevel }}</option>
@@ -61,7 +61,7 @@
                 <div class="row mb-4">
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example1">Stock Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example1">Stock Barang</label>
                         <input type="number" id="form6Example1" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{$update->stock}}" />                 
                         @error('stock')
                         <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example2">Gambar Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example2">Gambar Barang</label>
                         <input type="file" id="form6Example2" class="form-control @error('file_foto') is-invalid @enderror" name="file_foto" value="{{$update->file_foto}}"/>
                         @error('file_foto')
                         <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                   <div class="row mb-4">
                     <div class="col">
                       <div class="form-outline">
-                          <label class="form-label" for="form6Example1">Harga Makanan dan Minuman</label>
+                          <label class="form-label" for="form6Example1">Harga Barang</label>
                         <input type="number" id="form6Example1" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{$update->harga}}" />                 
                         @error('harga')
                         <div class="invalid-feedback">
