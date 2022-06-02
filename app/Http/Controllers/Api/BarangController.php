@@ -14,7 +14,7 @@ class BarangController extends Controller
         return response()->json([
             'success' => 1,
             'message' => 'Get Barang/Snack Berhasil',
-            'produks' => $barang
+            'barangs' => $barang
         ]);
     }
 

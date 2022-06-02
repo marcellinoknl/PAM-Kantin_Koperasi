@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\BarangController;
-
-
+use App\Http\Controllers\Api\TransksiController;
 use App\Http\Controllers\pulsaController;
 use App\Http\Controllers\pesananController;
-/*
+/*  
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
@@ -24,7 +23,7 @@ Route::post('login', [UserController::class,'login']);
 Route::post('register', [UserController::class,'register']);
 Route::get('makananminuman', [ProdukController::class,'index']);
 Route::get('barang', [BarangController::class,'index']);
-Route::post('chekout', 'Api\TransaksiController@store');
+Route::post('transaksi', [TransksiController::class,'store']);
 Route::get('chekout/user/{id}', 'Api\TransaksiController@history');
 Route::post('chekout/batal/{id}', 'Api\TransaksiController@batal');
 Route::post('push', 'Api\TransaksiController@pushNotif');

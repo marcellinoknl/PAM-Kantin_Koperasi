@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\produkController;
 use App\Http\Controllers\barangController;
 use App\Http\Controllers\pulsaController;
-use App\Http\Controllers\pesananController;
+use App\Http\Controllers\PemesananMakananMinumanController;
 use App\Http\Controllers\ruanganController;
+use App\Http\Controllers\akunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +41,17 @@ Route::post('/edit-barang-koperasi/{id}', [barangController::class, 'update'])->
 Route::post('/tambah-barang-koperasi/store', [barangController::class, 'store'])->name('formbarang.store');
 Route::get('/barang/delete/{id}', [barangController::class, 'delete'])->name('barang.hapus');
 
-Route::get('/validasipesanan', [pesananController::class, 'index']);
+//valdiasi pesanan makanan
+Route::get('/validasipesanan', [PemesananMakananMinumanController::class, 'index']);
+Route::get('/validasipesanan/delete/{id}', [PemesananMakananMinumanController::class, 'delete']);
 Route::get('/kelolapulsa', [pulsaController::class, 'index']);
 Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);
+
+//kelola akun
+Route::get('/kelolaakun', [akunController::class, 'index']);
+Route::get('/kelolaakun/delete/{id}', [akunController::class, 'delete']);
 });
+
 
 //kelola ruangan
 Route::get('/kelolaruangan', [ruanganController::class, 'kelolaruangan']);
@@ -52,7 +60,6 @@ Route::post('/tambahruangan/store', [ruanganController::class, 'store'])->name('
 Route::post('/editruangan/{id}', [ruanganController::class, 'update'])->name('ruangan.ubah');
 Route::get('/editruangan/{id}', [ruanganController::class, 'edit']);
 Route::get('/ruangan/delete/{id}', [ruanganController::class, 'delete'])->name('ruangan.hapus');
-
 
 
 Auth::routes();
