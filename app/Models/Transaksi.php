@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
-    protected $table = 'transaksis';
-    protected $primaryKey = 'id_pemesanan_makanan_minuman';
-
-    protected $fillable = ['kode_transaksi', 'tanggal_pemesanan_makanan_minuman','total_pembayaran','total_item','status','id_user','nama_penerima','nomor_telephone','note'];
+    protected $fillable = ['user_id', 'kode_payment',
+        'kode_trx', 'total_item', 'total_harga', 'kode_unik',
+        'status', 'name', 'phone', 'metode',
+        'deskripsi', 'expired_at','total_transfer','bank'];
 
     public function details(){
-        return $this->hasMany(TransaksiDetail::class, "id_pemesanan", "id_pemesanan_makanan_minuman");
+        return $this->hasMany(TransaksiDetail::class, "transaksi_id", "id");
     }
 
     public function user(){
-        return $this->belongsTo(User::class, "id", "id_user");
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 }

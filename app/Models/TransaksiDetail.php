@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class TransaksiDetail extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_details';
-    protected $primaryKey = 'id_pemesanan_makanan_minuman_detail';
-    
-    protected $fillable = ['id_makanan_minuman','id_pemesanan','kuantitas','total_harga'];
-    public function pemesanan(){
-        return $this->belongsTo(Transaksi::class, "id_pemesanan", "id_pemesanan_makanan_minuman");
+    protected $fillable = ['transaksi_id', 'produk_id', 'total_item', 'catatan',
+        'kode_promo', 'harga_asli', 'total_harga'];
+
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class, "transaksi_id", "id");
     }
 
-    public function makananminuman(){
-        return $this->belongsTo(produuk::class, "id_makanan_minuman", "id_makanan_minuman");
+    public function produk(){
+        return $this->belongsTo(produuk::class, "produk_id", "produk_id");
     }
 }

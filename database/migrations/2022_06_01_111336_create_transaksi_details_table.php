@@ -14,11 +14,12 @@ class CreateTransaksiDetailsTable extends Migration
     public function up()
     {
         Schema::create('transaksi_details', function (Blueprint $table) {
-            $table->increments('id_pemesanan_makanan_minuman_detail');
-            $table->integer('id_makanan_minuman')->unsigned();
-            $table->integer('id_pemesanan');
-            $table->integer('kuantitas');
-            $table->integer('total_harga');
+            $table->increments('id');
+            $table->integer('transaksi_id')->unsigned();
+            $table->integer('produk_id')->unsigned();
+            $table->integer('total_item')->unsigned();
+            $table->text('catatan')->nullable();
+            $table->integer('total_harga')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class TransksiController extends Controller
-{
+class TransaksiController extends Controller {
     public function store(Request $requset) {
         //nama, email, password
         $validasi = Validator::make($requset->all(), [
             'user_id' => 'required',
             'total_item' => 'required',
-            'nama_penerima' => 'required',
-            'total_pembayaran' => 'required',
-            'nomor_telephone' => 'required'
+            'total_harga' => 'required',
+            'name' => 'required',
+            'total_transfer' => 'required',
+            'bank' => 'required',
+            'phone' => 'required'
         ]);
 
         if ($validasi->fails()) {
@@ -24,24 +25,28 @@ class TransksiController extends Controller
             return $this->error($val[0]);
         }
 
-        $kode_transaksi = "INV/PYM/" . now()->format('Y-m-d') . "/" . rand(100, 999);
-        $status = "Pending";
-
+        $kode_payment = "ITDEL/MHS/" . now()->format('Y-m-d') . "/" . rand(100, 999);
+        $kode_trx = "DEL/KAKOP/" . now()->format('Y-m-d') . "/" . rand(100, 999);
+        $kode_unik = rand(100, 999);
+        $status = "MENUNGGU";
+        $expired_at = now()->addDay();
 
         $dataTransaksi = array_merge($requset->all(), [
-            'kode_transaksi' => $kode_transaksi,
+            'kode_payment' => $kode_payment,
+            'kode_trx' => $kode_trx,
+            'kode_unik' => $kode_unik,
             'status' => $status,
-            'tanggal_pemesanan_makanan_minuman' =>now()
+            'expired_at' => $expired_at
         ]);
 
         \DB::beginTransaction();
         $transaksi = Transaksi::create($dataTransaksi);
         foreach ($requset->produks as $produk) {
             $detail = [
-                'id_pemesanan_makanan_minuman' => $transaksi->id_pemesanan_makanan_minuman,
+                'transaksi_id' => $transaksi->id,
                 'produk_id' => $produk['produk_id'],
                 'total_item' => $produk['total_item'],
-                'note' => $produk['note'],
+                'catatan' => $produk['catatan'],
                 'total_harga' => $produk['total_harga']
             ];
             $transaksiDetail = TransaksiDetail::create($detail);
@@ -60,15 +65,15 @@ class TransksiController extends Controller
         }
     }
 
-    public function history($user_id) {
-        $transaksis = Transaksi::with(['user'])->whereHas('user', function ($query) use ($user_id) {
-            $query->whereId($user_id);
-        })->orderBy("id_pemesanan_makanan_minuman", "desc")->get();
+    public function history($id) {
+        $transaksis = Transaksi::with(['user'])->whereHas('user', function ($query) use ($id) {
+            $query->whereId($id);
+        })->orderBy("id", "desc")->get();
 
         foreach ($transaksis as $transaksi) {
             $details = $transaksi->details;
             foreach ($details as $detail) {
-                $detail->makananminuman;
+                $detail->produk;
             }
         }
 
@@ -103,4 +108,53 @@ class TransksiController extends Controller
         }
     }
 
+    public function pushNotif($title, $message, $mFcm) {
+
+        $mData = [
+            'title' => $title,
+            'body' => $message
+        ];
+
+        $fcm[] = $mFcm;
+
+        $payload = [
+            'registration_ids' => $fcm,
+            'notification' => $mData
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://fcm.googleapis.com/fcm/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "Content-type: application/json",
+                "Authorization: key=AAAAcv1o4p8:APA91bGntzKph5P-OQXUvLqBnn3simMe7fW5B-vmki1HsFHOGAD2pu4ZQYKuaJzawAHqmSwWGeO_g3Abin_tWrYSOPShbByNlZ7-YwGk4JZC2oXXTIBWVbdwtNRTMKk6gA1IAXccoY8B"
+            ),
+        ));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $data = [
+            'success' => 1,
+            'message' => "Push notif success",
+            'data' => $mData,
+            'firebase_response' => json_decode($response)
+        ];
+        return $data;
+    }
+
+    public function error($pasan) {
+        return response()->json([
+            'success' => 0,
+            'message' => $pasan
+        ]);
+    }
 }

@@ -1,35 +1,21 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App;
 
-class Ruangann extends Migration
+use Illuminate\Database\Eloquent\Model;
+
+class Transaksi extends Model
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        //
-        Schema::create('ruangann', function (Blueprint $table) {
-            $table->id();
-            $table->String('nama_ruangan', 100);
-            $table->String('keterangan', 255);
-            $table->timestamps();
+    protected $fillable = ['user_id', 'kode_payment',
+        'kode_trx', 'total_item', 'total_harga', 'kode_unik',
+        'status', 'resi', 'kurir', 'name', 'phone', 'detail_lokasi', 'metode',
+        'deskripsi', 'expired_at', 'jasa_pengiriaman', 'ongkir', 'total_transfer', 'bank'];
 
-        });
+    public function details(){
+        return $this->hasMany(TransaksiDetail::class, "transaksi_id", "id");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
+    public function user(){
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 }
