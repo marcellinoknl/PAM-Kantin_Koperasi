@@ -7,6 +7,8 @@ use App\Http\Controllers\pulsaController;
 use App\Http\Controllers\PemesananMakananMinumanController;
 use App\Http\Controllers\ruanganController;
 use App\Http\Controllers\akunController;
+use App\Http\Controllers\BookingRuanganController;
+use App\Http\Controllers\BeliPulsaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,8 @@ Route::get('/barang/delete/{id}', [barangController::class, 'delete'])->name('ba
 
 //valdiasi pesanan makanan
 Route::get('/validasipesanan', [PemesananMakananMinumanController::class, 'index']);
+Route::get('/edit-transaksi/{id}', [PemesananMakananMinumanController::class, 'edit']);
+Route::post('/edit-transaksi/{id}', [PemesananMakananMinumanController::class, 'update'])->name('transaksi.ubah');
 Route::get('/validasipesanan/delete/{id}', [PemesananMakananMinumanController::class, 'delete']);
 Route::get('/kelolapulsa', [pulsaController::class, 'index']);
 Route::get('/validasipulsa', [pulsaController::class, 'validasiindex']);
@@ -60,6 +64,19 @@ Route::post('/tambahruangan/store', [ruanganController::class, 'store'])->name('
 Route::post('/editruangan/{id}', [ruanganController::class, 'update'])->name('ruangan.ubah');
 Route::get('/editruangan/{id}', [ruanganController::class, 'edit']);
 Route::get('/ruangan/delete/{id}', [ruanganController::class, 'delete'])->name('ruangan.hapus');
+
+//booking ruangan
+
+Route::get('/validasiruangan', [BookingRuanganController::class, 'index']);
+Route::get('/edit-ruangan/{id}', [BookingRuanganController::class, 'edit']);
+Route::post('/edit-ruangan/{id}', [BookingRuanganController::class, 'update'])->name('ruangan.ubah');
+Route::get('/validasiruangan/delete/{id}', [BookingRuanganController::class, 'delete']);
+
+//beli pulsa
+Route::get('/validasipulsa', [BeliPulsaController::class, 'index']);
+Route::get('/edit-pulsa/{id}', [BeliPulsaController::class, 'edit']);
+Route::post('/edit-pulsa/{id}', [BeliPulsaController::class, 'update'])->name('pulsa.ubah');
+Route::get('/validasipulsa/delete/{id}', [BeliPulsaController::class, 'delete']);
 
 
 Auth::routes();

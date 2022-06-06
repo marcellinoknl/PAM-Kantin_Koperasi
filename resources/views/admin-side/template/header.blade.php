@@ -57,6 +57,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Kelola Ruangan
                     </a>
+                    <a class="nav-link" href="{{'/validasiruangan'}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Validasi Ruangan
+                    </a>
                     <a class="nav-link" href="{{'/kelolaakun'}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Kelola Akun User
@@ -73,23 +77,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
                                 Validasi Pesanan
                             </a>
-                            <a class="nav-link collapsed" href="/kelolapulsa" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
-                                Pulsa
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link" href="/validasipulsa">
+                                <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
+                                Validasi Pembelian Pulsa
                             </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    
-                                    <a class="nav-link" href="/kelolapulsa">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
-                                        Kelola Pulsa</a>
-                                    
-                                    <a class="nav-link" href="/validasipulsa">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>  
-                                        Validasi Pulsa</a>
-                                </nav>
-                            </div>
                         </nav>
                     </div>
         </nav>

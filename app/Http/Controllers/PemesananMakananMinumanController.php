@@ -9,25 +9,28 @@ use Illuminate\Http\Request;
 class PemesananMakananMinumanController extends Controller
 {
     public function index(){
-        $pemesanans = DB::table('transaksis')
-        ->join('users', 'users.id','=','transaksis.user_id')
-        ->select('users.nama_lengkap','transaksis.*')
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $pemesanans = DB::table('transaksis')->get();
         return view('admin-side.page-admin.validasipesanan.validasipesanan', compact('pemesanans'));
     }
 
-    public function update(Request $request, $id_pemesanan_makanan_minuman){
-        $update = Transaksi::find($id_pemesanan_makanan_minuman);
+    public function edit($id)
+    {
+        $update = Transaksi::find($id);
+
+        return view('admin-side.page-admin.validasipesanan.edit-pesanan', compact('update'));
+    }
+
+    public function update(Request $request, $id){
+        $update = Transaksi::find($id);
         $update->status = $request->status;
         $update-> save();
         return redirect('validasipesanan')->with('success', "Berhasil mengubah status pemesanan!");
 
     }
 
-    public function delete($id_pemesanan_makanan_minuman)
+    public function delete($id)
     {
-        $deletepemesanan = Transaksi::find($id_pemesanan_makanan_minuman);
+        $deletepemesanan = Transaksi::find($id);
         if ($deletepemesanan->delete()) {
             return redirect()->back()->with('success', "Berhasil menghapus pemesanan!");
         }

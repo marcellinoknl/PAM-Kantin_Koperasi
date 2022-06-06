@@ -6,8 +6,9 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\TransaksiController;
-use App\Http\Controllers\pulsaController;
-use App\Http\Controllers\pesananController;
+use App\Http\Controllers\Api\BookingRuanganController;
+use App\Http\Controllers\Api\BeliPulsaController;
+
 /*  
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +27,5 @@ Route::get('barang', [BarangController::class,'index']);
 Route::post('transaksi', [TransaksiController::class,'store']);
 Route::get('transaksi/user/{id}',[TransaksiController::class,'history']);
 Route::get('transaksi/batal/{id}',[TransaksiController::class,'batal']);
+Route::post('bookingruangan',[BookingRuanganController::class,'boobkingRuangan']);
+Route::post('belipulsa',[BeliPulsaController::class,'belipulsa']);
